@@ -19,37 +19,44 @@ const Settings = () => {
 
     // Simulated API call function
     const syncTelegramGroups = async () => {
-        setLoading(true);
-        console.log(token)
+    setLoading(true);
+    console.log(token);
 
-        try {
-            // Call your actual API here
-            const response = await axios.post(`${API_URL}/telegram-chat-ids/fetch`,{
+    try {
+        const response = await axios.post(
+            `${API_URL}/telegram-chat-ids/fetch`,
+            {}, // empty JSON body
+            {
                 headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            })
-            console.log(response)
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
 
-            Swal.fire({
-                title: 'Success!',
-                text: 'Telegram groups synced successfully.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-              })
+        console.log(response);
 
-        } catch (error) {
-            console.log(error)
-            Swal.fire({
-                title: 'Error!',
-                text: 'There was an error syncing the telegram groups.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-              })
-        }finally {
-            setLoading(false); // Hide loader
-        }
-    };
+        Swal.fire({
+            title: 'Success!',
+            text: 'Telegram groups synced successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        Swal.fire({
+            title: 'Error!',
+            text: 'There was an error syncing the telegram groups.',
+            icon: 'error',
+            confirmButtonText: 'OK',
+        });
+    } finally {
+        setLoading(false); // Hide loader
+    }
+};
+
 
     return (
         <div className="card" style={{ maxWidth: "100%", boxSizing: "border-box" }}>
