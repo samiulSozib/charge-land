@@ -37,8 +37,8 @@ const Settings = () => {
         console.log(response);
 
         Swal.fire({
-            title: 'Success!',
-            text: 'Telegram groups synced successfully.',
+            title: t('SUCCESSFUL'),
+            text: t('TELEGRAM_SYNC_SUCCESS'),
             icon: 'success',
             confirmButtonText: 'OK',
         });
@@ -47,8 +47,8 @@ const Settings = () => {
         console.log(error);
 
         Swal.fire({
-            title: 'Error!',
-            text: 'There was an error syncing the telegram groups.',
+            title: t('ERROR'),
+            text: t('TELEGRAM_SYNC_FAILED'),
             icon: 'error',
             confirmButtonText: 'OK',
         });
