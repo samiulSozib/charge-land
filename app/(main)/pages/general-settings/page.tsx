@@ -19,11 +19,12 @@ const Settings = () => {
 
     // Simulated API call function
     const syncTelegramGroups = async () => {
-    setLoading(true);
-    console.log(token);
+        setLoading(true);
+        console.log(token)
 
-    try {
-        const response = await axios.post(
+        try {
+            // Call your actual API here
+            const response = await axios.post(
             `${API_URL}/telegram-chat-ids/fetch`,
             {}, // empty JSON body
             {
@@ -34,29 +35,25 @@ const Settings = () => {
             }
         );
 
-        console.log(response);
+            Swal.fire({
+                title: t('SUCCESSFUL'),
+                text: t('TELEGRAM_SYNC_SUCCESS'),
+                icon: 'success',
+                confirmButtonText: 'OK'
+              })
 
-        Swal.fire({
-            title: t('SUCCESSFUL'),
-            text: t('TELEGRAM_SYNC_SUCCESS'),
-            icon: 'success',
-            confirmButtonText: 'OK',
-        });
-
-    } catch (error) {
-        console.log(error);
-
-        Swal.fire({
-            title: t('ERROR'),
-            text: t('TELEGRAM_SYNC_FAILED'),
-            icon: 'error',
-            confirmButtonText: 'OK',
-        });
-    } finally {
-        setLoading(false); // Hide loader
-    }
-};
-
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                title: t('ERROR'),
+                text: t('TELEGRAM_SYNC_FAILED'),
+                icon: 'error',
+                confirmButtonText: 'OK'
+              })
+        }finally {
+            setLoading(false); // Hide loader
+        }
+    };
 
     return (
         <div className="card" style={{ maxWidth: "100%", boxSizing: "border-box" }}>
